@@ -1,2 +1,6 @@
 scp -r inception amouassi@10.11.100.241:/home/amouassi
 ssh amouassi@10.11.100.241 
+
+github:
+git init
+git remote -v add origin https://github.com/Nozomu-me/Inception.git
