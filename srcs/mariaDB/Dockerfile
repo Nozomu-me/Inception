@@ -5,22 +5,14 @@ RUN apk add openrc
 RUN openrc
 RUN touch run/openrc/softlevel
 
-# # install nginx
-# RUN apk add nginx
-# RUN mkdir /run/nginx
+#install supervisor
+RUN apk --update add supervisor
 
-# COPY nginx.conf /etc/nginx/
-# COPY index.html /www/
-
-# # install openssl
-# RUN apk add openssl
-# RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt -subj "/C=MA/ST=Khouribga/L=Khouribga/O=1337/CN=Amouassi"
-
-#install mariadb
+#install and setup mariadb
 RUN apk add mysql mysql-client openrc
-COPY initmdb.sh /tmp/
-CMD sh /tmp/initmdb.sh 
-# ENTRYPOINT /bin/sh
-# RUN /etc/init.d/mariadb setup
+COPY setup.sh /tmp/
+COPY supervisord.conf /etc/
+COPY mariadb-server.cnf /etc/my.cnf.d/
+CMD sh /tmp/setup.sh
 
-EXPOSE 80 443
+EXPOSE 3306
