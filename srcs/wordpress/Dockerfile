@@ -16,7 +16,7 @@ COPY www.conf /etc/php7/php-fpm.d
 #install supervisord
 RUN apk --update add supervisor
 COPY supervisord.conf /etc/
-COPY wp-config.php wordpress
-CMD if [!-d /var/www/wordpress];then mv wordpress var/www; fi && /usr/bin/supervisord -n
+COPY wp-config.php /wordpress/
+CMD if [ ! -d /var/www/wordpress ];then mv /wordpress /var/www/; fi && /usr/bin/supervisord -n
 
 EXPOSE 80 443
