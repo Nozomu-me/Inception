@@ -1,4 +1,4 @@
-FROM alpine:3.12
+FROM alpine:3.13
 RUN apk update
 RUN apk upgrade
 RUN apk add openrc
@@ -11,6 +11,12 @@ RUN apk add wget
 RUN wget http://wordpress.org/latest.tar.gz
 RUN tar -xzvf latest.tar.gz
 RUN rm latest.tar.gz
-RUN mv wordpress /www/
+COPY www.conf /etc/php7/php-fpm.d
+
+#install supervisord
+RUN apk --update add supervisor
+COPY supervisord.conf /etc/
+COPY wp-config.php wordpress
+CMD if [!-d /var/www/wordpress];then mv wordpress var/www; fi && /usr/bin/supervisord -n
 
 EXPOSE 80 443

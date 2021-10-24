@@ -1,11 +1,57 @@
 version: '3' #the version or standards used to write the docker-compose file
 
 services:
-    web:
-       image: nginx
-       ports:
-          - 80:80
-    database:
-       image: mariadb
-	   ports:
-		  - 3306:3306
+   nginx:
+      build: "nginx/"
+      image: nginx
+      restart: always
+      container_name: nginx
+      ports:
+         - 443:443
+      volumes:
+         - wp-volume:/var/www/
+      networks:
+         - inception
+      env_file:
+         - .env
+   mariadb:
+      build: "mariadb/"
+      image: mariadb
+      restart: always
+      container_name: mariadb
+      volumes:
+         - mariadb-volume:/var/lib/mysql
+      networks:
+         - inception
+      env_file:
+         - .env
+   wordpress:
+      build: "wordpress/"
+      depends_on:
+         - nginx
+         - mariadb
+      image: wordpress
+      restart: always
+      container_name: wordpress
+      volumes:
+         - wp-volume:/var/www/
+      networks:
+         - inception
+      env_file:
+         - .env
+volumes:
+   wp-volume:
+      driver_opts:
+         type: 'none'
+         o: 'bind'
+         device: '/home/amouassi/data/wp-volume'
+   mariadb-volume:
+      driver_opts:
+         type: 'none'
+         o: 'bind'
+         device: '/home/amouassi/data/mariadb-volume'
+
+networks:
+   inception:
+      name: inception
+      driver: bridge

@@ -1,4 +1,4 @@
-FROM alpine:3.12
+FROM alpine:3.13
 RUN apk update
 RUN apk upgrade
 RUN apk add openrc
@@ -20,5 +20,9 @@ RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private
 RUN apk add mariadb mariadb-client
 RUN /etc/init.d/mariadb setup
 
+#install supervisord
+RUN apk --update add supervisor
+COPY supervisord.conf /etc/
+CMD ["/usr/bin/supervisord", "-n"]
 
 EXPOSE 80 443
