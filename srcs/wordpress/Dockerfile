@@ -17,6 +17,12 @@ COPY www.conf /etc/php7/php-fpm.d
 RUN apk --update add supervisor
 COPY supervisord.conf /etc/
 COPY wp-config.php /wordpress/
-CMD if [ ! -d /var/www/wordpress ];then mv /wordpress /var/www/; fi && /usr/bin/supervisord -n
 
-EXPOSE 80 443
+#install redis cache backend script
+RUN apk add unzip
+RUN cd /wordpress/wp-content/plugins && wget https://downloads.wordpress.org/plugin/redis-cache.2.0.21.zip && \
+	unzip redis-cache.2.0.21.zip && rm -rf redis-cache.2.0.21.zip 
+RUN cd /wordpress/wp-content/plugins/redis-cache/includes && cp object-cache.php /wordpress/wp-content/
+
+
+CMD if [ ! -d /var/www/wordpress ];then mv /wordpress /var/www/; fi && /usr/bin/supervisord -n

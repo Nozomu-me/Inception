@@ -30,6 +30,7 @@ services:
       depends_on:
          - nginx
          - mariadb
+         - redis
       image: wordpress
       restart: always
       container_name: wordpress
@@ -39,6 +40,13 @@ services:
          - inception
       env_file:
          - .env
+   redis:
+      build: "bonus/redis/"
+      image: redis
+      restart: always
+      container_name: redis
+      networks:
+         - inception
 volumes:
    wp-volume:
       driver_opts:
