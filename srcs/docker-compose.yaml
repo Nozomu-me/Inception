@@ -47,6 +47,13 @@ services:
       container_name: redis
       networks:
          - inception
+   ftp:
+      build: "bonus/ftp/"
+      image: ftp
+      restart: always
+      container_name: ftp
+      networks:
+         - inception
 volumes:
    wp-volume:
       driver_opts:
