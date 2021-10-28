@@ -9,8 +9,8 @@ RUN touch /run/openrc/softlevel
 RUN apk add vsftpd
 COPY vsftpd.conf etc/vsftpd/
 
-RUN adduser -D amal
-RUN echo -e "amal:amal" | chpasswd
+RUN adduser -D amouassi
+RUN echo -e "amouassi:amouassi" | chpasswd
 
 #install supervisord
 RUN apk --update add supervisor

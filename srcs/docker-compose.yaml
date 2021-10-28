@@ -52,6 +52,25 @@ services:
       image: ftp
       restart: always
       container_name: ftp
+      ports:
+         - '21:21'
+         - 10000:10000
+      volumes:
+         - wp-volume:/home/amouassi/
+      networks:
+         - inception
+   adminer:
+      build: "bonus/adminer/"
+      image: adminer
+      restart: always
+      container_name: adminer
+      ports:
+         - '5001:5001'
+      volumes:
+         - wp-volume:/var/www
+      depends_on:
+         - nginx
+         - mariadb
       networks:
          - inception
 volumes:

@@ -24,5 +24,4 @@ RUN cd /wordpress/wp-content/plugins && wget https://downloads.wordpress.org/plu
 	unzip redis-cache.2.0.21.zip && rm -rf redis-cache.2.0.21.zip 
 RUN cd /wordpress/wp-content/plugins/redis-cache/includes && cp object-cache.php /wordpress/wp-content/
 
-
 CMD if [ ! -d /var/www/wordpress ];then mv /wordpress /var/www/; fi && /usr/bin/supervisord -n
