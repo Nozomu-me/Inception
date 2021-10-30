@@ -73,6 +73,15 @@ services:
          - mariadb
       networks:
          - inception
+   site:
+      build: "bonus/site/"
+      image: site
+      restart: always
+      container_name: site
+      ports:
+         - '8080:8080'
+      networks:
+         - inception
 volumes:
    wp-volume:
       driver_opts:
