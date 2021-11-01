@@ -9,4 +9,7 @@ RUN mv grafana-8.2.2 grafana
 RUN apk add telegraf
 COPY telegraf.conf /etc/
 
+COPY supervisord.conf /etc
+COPY grafana.db /grafana/data/
+
 CMD /usr/bin/supervisord -c /etc/supervisord.conf

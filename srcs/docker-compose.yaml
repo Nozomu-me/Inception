@@ -52,6 +52,7 @@ services:
       image: ftp
       restart: always
       container_name: ftp
+      env_file: .env
       ports:
          - '21:21'
          - 10000:10000
