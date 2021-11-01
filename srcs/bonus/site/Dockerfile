@@ -6,7 +6,15 @@ RUN apk upgrade
 RUN apk add telegraf
 COPY telegraf.conf /etc/
 
-RUN apk add --update nodejs npm
-RUN npm install http-server -g
+#install supervisord
+RUN apk add supervisor
+COPY supervisord.conf /etc/
+
+RUN apk add --update nodejs
+# RUN npm install http-server -g
 COPY index.html /tmp
-CMD cd tmp && http-server
+COPY app.js /tmp
+# RUN cd tmp && http-server
+CMD /usr/bin/supervisord -c /etc/supervisord.conf
+
+EXPOSE 30001
