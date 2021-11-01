@@ -3,7 +3,7 @@
 up: build
 	cd srcs && docker-compose up
 
-build:
+build: clear
 	
 	cd srcs && docker-compose build
 
