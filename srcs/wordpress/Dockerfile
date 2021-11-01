@@ -18,6 +18,10 @@ RUN apk --update add supervisor
 COPY supervisord.conf /etc/
 COPY wp-config.php /wordpress/
 
+#install telegraf
+RUN apk add telegraf
+COPY telegraf.conf /etc/
+
 #install redis cache backend script
 RUN apk add unzip
 RUN cd /wordpress/wp-content/plugins && wget https://downloads.wordpress.org/plugin/redis-cache.2.0.21.zip && \

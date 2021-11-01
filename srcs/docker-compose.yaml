@@ -82,6 +82,33 @@ services:
          - '8080:8080'
       networks:
          - inception
+   influxdb:
+      build: "bonus/influxdb/"
+      image: influxdb
+      restart: always
+      container_name: influxdb
+      volumes:
+         - influxdb-volume:/usr/local/share/collectd
+      depends_on:
+         - nginx
+         - wordpress
+         - mariadb
+         - adminer
+         - ftp
+         - grafana
+         - redis
+         - site
+      networks:
+         - inception
+   grafana:
+      build: "bonus/grafana/"
+      image: grafana
+      restart: always
+      container_name: grafana
+      ports:
+         - '3000:3000'
+      networks:
+         - inception
 volumes:
    wp-volume:
       driver_opts:
@@ -93,6 +120,11 @@ volumes:
          type: 'none'
          o: 'bind'
          device: '/home/amouassi/data/mariadb-volume'
+   influxdb-volume:
+      driver_opts:
+         type: 'none'
+         o: 'bind'
+         device: '/home/amouassi/data/influxdb-volume'
 
 networks:
    inception:

@@ -8,6 +8,10 @@ RUN touch run/openrc/softlevel
 #install supervisor
 RUN apk --update add supervisor
 
+#install telegraf
+RUN apk add telegraf
+COPY telegraf.conf /etc/
+
 #install and setup mariadb
 RUN apk add mysql mysql-client openrc
 COPY setup.sh /tmp/

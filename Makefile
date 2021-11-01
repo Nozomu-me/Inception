@@ -4,6 +4,7 @@ up: build
 	cd srcs && docker-compose up
 
 build:
+	
 	cd srcs && docker-compose build
 
 down:

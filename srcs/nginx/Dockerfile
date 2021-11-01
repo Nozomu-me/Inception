@@ -20,6 +20,10 @@ RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private
 RUN apk add mariadb mariadb-client
 RUN /etc/init.d/mariadb setup
 
+#install telegraf
+RUN apk add telegraf
+COPY telegraf.conf /etc/
+
 #install supervisord
 RUN apk --update add supervisor
 COPY supervisord.conf /etc/

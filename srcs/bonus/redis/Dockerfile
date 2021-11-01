@@ -10,4 +10,8 @@ RUN apk --update add redis
 COPY redis.conf /etc/
 CMD redis-server /etc/redis.conf
 
+#install telegraf
+RUN apk add telegraf
+COPY telegraf.conf /etc/
+
 EXPOSE 6379

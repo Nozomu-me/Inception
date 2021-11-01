@@ -6,13 +6,18 @@ RUN openrc
 RUN touch /run/openrc/softlevel
 
 #install vsftpd
-RUN apk add vsftpd
+RUN apk add vsftpd 
 COPY vsftpd.conf etc/vsftpd/
 
 RUN adduser -D amouassi
 RUN echo -e "amouassi:amouassi" | chpasswd
 
+#install telegraf
+RUN apk add telegraf
+COPY telegraf.conf /etc/
+
 #install supervisord
 RUN apk --update add supervisor
 COPY supervisord.conf /etc/
+# RUN 
 CMD ["/usr/bin/supervisord", "-n"]
