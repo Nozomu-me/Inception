@@ -14,7 +14,16 @@ RUN apk add --update nodejs
 # RUN npm install http-server -g
 COPY index.html /tmp
 COPY app.js /tmp
+COPY public /tmp
+COPY package.json /tmp
+
+RUN apk add npm
 # RUN cd tmp && http-server
+
+WORKDIR /tmp
+RUN npm i
+ADD public/ public
 CMD /usr/bin/supervisord -c /etc/supervisord.conf
 
+# CMD npm i && node app.js
 EXPOSE 30001
