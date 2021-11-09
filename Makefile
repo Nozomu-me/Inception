@@ -1,10 +1,8 @@
 
-
 up: build
 	cd srcs && docker-compose up
 
-build: clear
-	
+build:
 	cd srcs && docker-compose build
 
 down:

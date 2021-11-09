@@ -113,9 +113,9 @@ services:
 volumes:
    wp-volume:
       driver_opts:
-         type: 'none'
-         o: 'bind'
-         device: '/home/amouassi/data/wp-volume'
+         type: none
+         o: bind
+         device: /home/amouassi/data/wp-volume
    mariadb-volume:
       driver_opts:
          type: 'none'

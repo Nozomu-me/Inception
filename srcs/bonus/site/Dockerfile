@@ -12,7 +12,7 @@ COPY supervisord.conf /etc/
 
 RUN apk add --update nodejs
 # RUN npm install http-server -g
-COPY index.html /tmp
+# COPY index.html /tmp
 COPY app.js /tmp
 COPY public /tmp
 COPY package.json /tmp
