@@ -13,7 +13,7 @@ RUN apk add telegraf
 COPY telegraf.conf /etc/
 
 #install and setup mariadb
-RUN apk add mysql mysql-client openrc
+RUN apk add mysql mysql-client
 COPY setup.sh /tmp/
 COPY supervisord.conf /etc/
 COPY mariadb-server.cnf /etc/my.cnf.d/

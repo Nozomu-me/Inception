@@ -2,7 +2,7 @@ version: '3' #the version or standards used to write the docker-compose file
 
 services:
    nginx:
-      build: "nginx/"
+      build: "requirements/nginx/"
       image: nginx
       restart: always
       container_name: nginx
@@ -15,7 +15,7 @@ services:
       env_file:
          - .env
    mariadb:
-      build: "mariadb/"
+      build: "requirements/mariadb/"
       image: mariadb
       restart: always
       container_name: mariadb
@@ -26,7 +26,7 @@ services:
       env_file:
          - .env
    wordpress:
-      build: "wordpress/"
+      build: "requirements/wordpress/"
       depends_on:
          - nginx
          - mariadb
@@ -41,14 +41,14 @@ services:
       env_file:
          - .env
    redis:
-      build: "bonus/redis/"
+      build: "requirements/bonus/redis/"
       image: redis
       restart: always
       container_name: redis
       networks:
          - inception
    ftp:
-      build: "bonus/ftp/"
+      build: "requirements/bonus/ftp/"
       image: ftp
       restart: always
       container_name: ftp
@@ -61,7 +61,7 @@ services:
       networks:
          - inception
    adminer:
-      build: "bonus/adminer/"
+      build: "requirements/bonus/adminer/"
       image: adminer
       restart: always
       container_name: adminer
@@ -75,7 +75,7 @@ services:
       networks:
          - inception
    site:
-      build: "bonus/site/"
+      build: "requirements/bonus/site/"
       image: site
       restart: always
       container_name: site
@@ -84,7 +84,7 @@ services:
       networks:
          - inception
    influxdb:
-      build: "bonus/influxdb/"
+      build: "requirements/bonus/influxdb/"
       image: influxdb
       restart: always
       container_name: influxdb
@@ -102,7 +102,7 @@ services:
       networks:
          - inception
    grafana:
-      build: "bonus/grafana/"
+      build: "requirements/bonus/grafana/"
       image: grafana
       restart: always
       container_name: grafana
